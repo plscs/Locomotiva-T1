@@ -27,17 +27,31 @@ public class GaragemLocomotiva {
             }
         }
     }
-    public Locomotiva[] createCatalog() {
-        Locomotiva[] inventory = new Locomotiva[100];
+    public ArrayList<Locomotiva> createCatalog() throws IOException {
+        ArrayList<Locomotiva> inventory = new ArrayList<>(100) ;
         BufferedReader r = new BufferedReader(new FileReader("catalog.txt"));
         int i = 0;
         String line = r.readLine();
         while (line != null) {
-            catalog[i] = createBird(line);
+            inventory.add(i, createLocomotiva(line));
             line = r.readLine();
             i++;
         }
         r.close();
         return inventory;
     }
+
+    private Locomotiva createLocomotiva(String line) {
+        String[] attributes = line.split(",");
+        boolean type = Boolean.parseBoolean(attributes[0]);
+        int id = Integer.parseInt(attributes[1]);
+        double carga = Double.parseDouble(attributes[2]);
+        int size = Integer.parseInt(attributes[5]);
+        //boolean[] habitats = new boolean[6];
+        /*for(int i = 0; i < 6; i++)
+            habitats[i] = attributes[i+6].equals( "1" )?  true : false;*/
+        return new Locomotiva(type, size, carga, size, size);
+    }
+        
+    
 }
