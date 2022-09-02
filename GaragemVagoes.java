@@ -1,5 +1,12 @@
+import java.util.ArrayList;
 public class GaragemVagoes {
-    public Vagao buscarVagaoLivre() {
-        return null;
+
+    private ArrayList gArrayList;//??
+   
+    
+    public GaragemVagoes(){
+        gArrayList = new ArrayList<>();
     }
-}
+    
+} 
+
