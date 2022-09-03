@@ -6,6 +6,7 @@ public class Locomotiva {
     private boolean locomotiva;
 
     public Locomotiva(boolean locomotiva, int identificador, double pesoMaximo, int composição, int qtdMaxVagoes){
+        this.locomotiva = locomotiva;
         this.identificador = identificador;
         this.pesoMaximo = pesoMaximo;
         this.composição = composição;
@@ -31,5 +32,8 @@ public class Locomotiva {
     public int getQtdMaxVagoes(){
         return this.qtdMaxVagoes;
 
+    }
+    public String toString(){
+        return locomotiva+","+identificador+","+pesoMaximo+","+composição+","+qtdMaxVagoes+"." ;
     }
 }
