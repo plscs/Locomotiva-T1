@@ -1,5 +1,7 @@
+import java.util.ArrayList;
+
 public class Composição{
-    
+    ArrayList<Composição> trem;
     public int getIdentificador(){
         return 1;
     }

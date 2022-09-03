@@ -6,7 +6,7 @@ public class Vagao {
 
 
     public Vagao(boolean vagao, int identificador, double capCarga, int composição){
-        this.vagao = true;
+        this.vagao = vagao;
         this.identificador = identificador;
         this.capCarga = capCarga;
         this.composição = composição;
@@ -26,5 +26,8 @@ public class Vagao {
     public int getComposição(){
         return this.composição;
 
+    }
+    public String toString(){
+        return vagao+","+identificador+","+capCarga+","+composição+"." ;
     }
 }
