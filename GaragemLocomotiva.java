@@ -56,7 +56,17 @@ public class GaragemLocomotiva {
     
     public String toString(){
         ArrayList<Locomotiva> r = getInvetory();
-        return (r.get(1).toString());
+        int s = r.size()-1;
+        if(s!=0){
+            return toString(s);
+        }
+        return toString(s)+toString(s-1);
+           
     }
-    
+
+    public String toString(int op){
+        ArrayList<Locomotiva> r = getInvetory();
+        
+        return r.get(op).toString();
+    }
 }

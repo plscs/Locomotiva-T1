@@ -30,4 +30,7 @@ public class Vagao {
     public String toString(){
         return vagao+","+identificador+","+capCarga+","+composição+"." ;
     }
+    public void setComposição(int c){
+        this.composição = c;
+    }
 }

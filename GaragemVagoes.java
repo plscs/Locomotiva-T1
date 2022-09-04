@@ -56,7 +56,13 @@ public class GaragemVagoes {
     
     public String toString(){
         ArrayList<Vagao> r = getInvetory();
-        return (r.get(1).toString());
+
+        return (r.iterator().toString());
+    }
+    public String toString(int op){
+        ArrayList<Vagao> r = getInvetory();
+        
+        return (r.get(op).toString());
     }
     
 }
