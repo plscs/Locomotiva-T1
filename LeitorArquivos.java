@@ -1,11 +1,14 @@
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 
 public class LeitorArquivos {
     public static void main(String[] args) {
         try {
             if(args.length > 0) {
-                String nomeAquivo = args[0];
-                Path caminhoArquivo = Paths.get(nomeArquivo);
+                //String nomeAquivo = args[0];
+                Path caminhoArquivo = Paths.get("nomeArquivo");
                 List<String> linhas = Files.readAllLines(caminhoArquivo);
                 for (String linha : linhas) {
                     String[] dados = linha.split(";");

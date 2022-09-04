@@ -34,6 +34,6 @@ public class Locomotiva {
 
     }
     public String toString(){
-        return locomotiva+","+identificador+","+pesoMaximo+","+composição+","+qtdMaxVagoes+"." ;
+        return "ID:"+identificador+"Peso Maximo(T):"+pesoMaximo+"É parte do Trem:"+composição+"Maximo de Vagoes:"+qtdMaxVagoes+"." ;
     }
 }
