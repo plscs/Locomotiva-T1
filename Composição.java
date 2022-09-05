@@ -133,10 +133,19 @@ public class Composição{
             if(trem.get(i) instanceof Vagao)
                 Carga=Carga+((Vagao) trem.get(i)).getCapCarga();
         return Carga;
+    }
     
-
-    } 
+    public void zeraTudo(){
+        for(int i=0; i>=trem.size();i++){
+            if(trem.get(i) instanceof Vagao)
+                ((Vagao) trem.get(i)).setComposição(0);
+            if(trem.get(i) instanceof Locomotiva)
+                ((Locomotiva) trem.get(i)).setComposição(0);
+            }
+            trem.clear();
+    }
 }
+
 
 
 

@@ -1,5 +1,27 @@
-//import java.util.List;
+import java.util.ArrayList;
 
 public class PatioComposicoes {
-   // private List<Composicao> composicoes;
+   private ArrayList<Composição> patio;
+  
+   public PatioComposicoes(){
+      this.patio = new ArrayList<Composição>();
+   }
+
+   public void addTrem(Composição trem){
+      patio.add(trem);
+   }
+
+   public void listaTrens(){
+      for(int i=0;i<=patio.size();i++){
+         if(patio.get(i) instanceof Composição){
+            System.out.println("Índice: "+i+"; Identificador"+patio.get(i).getIdentificador());
+         }
+      }
+   }
+
+   public void desfazTrem(Composição trem){
+      trem.zeraTudo();
+      patio.remove(trem);
+
+   }
 }
