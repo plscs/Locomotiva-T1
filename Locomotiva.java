@@ -37,6 +37,6 @@ public class Locomotiva {
         this.composição = c;
     }
     public String toString(){
-        return "ID:"+identificador+"Peso Maximo(T):"+pesoMaximo+"É parte do Trem:"+composição+"Maximo de Vagoes:"+qtdMaxVagoes+"." ;
+        return "ID:"+identificador+" Peso Maximo(T):"+pesoMaximo+" Parte do Trem:"+composição+" Maximo de Vagoes:"+qtdMaxVagoes+"." ;
     }
 }

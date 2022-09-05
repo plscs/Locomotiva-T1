@@ -23,7 +23,10 @@
     }
 }
 */
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import javax.swing.text.DefaultStyledDocument.ElementSpec;
 
 public class Menu {
 
@@ -106,11 +109,26 @@ public class Menu {
                 System.out.println("");
                 break;
             case 4:
+                ArrayList<Locomotiva> l = garagemLocomotiva.getInvetory();
+                
                 System.out.println("Lista de locomotivas livres:");
-                System.out.println("");
+                for(int i = 0; i < l.size(); i++){
+                    if (l.get(i).getComposição()!= 0){
+                        System.out.println(garagemLocomotiva.toString(i));
+                        }
+            }
+                //System.out.println("");
                 break;
             case 5:
+                ArrayList<Vagao> g = garagemVagoes.getInvetory();
+                
                 System.out.println("Lista de vagões livres:");
+                for(int i = 0; i < g.size(); i++){
+                    if (g.get(i).getComposição()!= 0){
+                    System.out.println(garagemLocomotiva.toString(i));
+                    }    
+            }
+                
                 break;
             case 6:
                 mainMenu(garagemLocomotiva, garagemVagoes, composição);

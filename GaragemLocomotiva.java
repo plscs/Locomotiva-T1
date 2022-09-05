@@ -54,16 +54,7 @@ public class GaragemLocomotiva {
         return new Locomotiva(type, id, carga, 0, qtdMaxVagões);
     }
     
-    public String toString(){
-        ArrayList<Locomotiva> r = getInvetory();
-        int s = r.size()-1;
-        if(s!=0){
-            return toString(s);
-        }
-        return toString(s)+toString(s-1);
-           
-    }
-
+    
     public String toString(int op){
         ArrayList<Locomotiva> r = getInvetory();
         
