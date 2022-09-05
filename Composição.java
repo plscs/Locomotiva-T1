@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Composição{
     private ArrayList<Object> trem;
 
-    private int c = 0;
+    private static int c = 0;
 
     public Composição(){
         this.trem = new ArrayList<Object>();

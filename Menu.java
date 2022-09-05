@@ -25,7 +25,7 @@
 */
 import java.util.ArrayList;
 import java.util.Scanner;
-//import javax.swing.text.DefaultStyledDocument.ElementSpec;
+import javax.swing.text.DefaultStyledDocument.ElementSpec;
 
 public class Menu {
     
@@ -41,8 +41,8 @@ public class Menu {
 
     public  void mainMenu(){
         System.out.println("Bem-vindo");
-        System.out.println("Digite o Número correspondente à opção desejada:");
-        System.out.println("\n1 Gerar nova composição (trem); \n2 Editar um trem; \n3 Listar todas os trens já criados (todos os trens que estão no pátio); \n4 Desfazer um trem; \n0 Sair e fechar o programa.");
+        System.out.println("Digite o Numero correspondente a opcao desejada:");
+        System.out.println("\n1 Gerar nova composicao (trem); \n2 Editar um trem; \n3 Listar todas os trens ja criados (todos os trens que estao no patio); \n4 Desfazer um trem; \n0 Sair e fechar o programa.");
 
         int op = sc.nextInt();
         switch(op) {
@@ -53,8 +53,9 @@ public class Menu {
                 System.out.println("Selecione a Locomotiva que quer adicionar pelo ID" );
                 
                 int locoID = sc.nextInt();
-                patio.addTrem(addLocomotiva(garagemLocomotiva, locoID));
+                patio.addTrem(addLocomotiva(garagemLocomotiva, locoID-1));
                 System.out.println("Novo trem gerado. ID: " + patio.getTrens().get(patio.getTrens().size()-1).getIdentificador());
+                mainMenu();
                 break;
             case 2:
                 compositionMenu(garagemLocomotiva, garagemVagoes, patio);
@@ -81,8 +82,8 @@ public class Menu {
                 
         System.out.println("Lista de locomotivas livres:");
         for(int i = 0; i < l.size(); i++){
-            if (l.get(i).getComposição()!= 0){
-                    garagemLocomotiva.toString(i);
+            if (l.get(i).getComposição()== 0){
+                    System.out.println(garagemLocomotiva.toString(i));
                 }
     }
     }
