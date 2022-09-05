@@ -4,7 +4,7 @@ public class PatioComposicoes {
    private ArrayList<Composição> patio;
   
    public PatioComposicoes(){
-      this.patio = new ArrayList<Composição>();
+      this.patio = new ArrayList<Composição>(0);
    }
 
    public void addTrem(Composição trem){
@@ -18,6 +18,10 @@ public class PatioComposicoes {
          }
       }
    }
+   public ArrayList<Composição> getTrens() {
+      return this.patio;
+
+  }
 
    public void desfazTrem(Composição trem){
       trem.zeraTudo();

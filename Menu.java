@@ -25,18 +25,21 @@
 */
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import javax.swing.text.DefaultStyledDocument.ElementSpec;
+//import javax.swing.text.DefaultStyledDocument.ElementSpec;
 
 public class Menu {
-
-    public Menu(GaragemLocomotiva garagemLocomotiva, GaragemVagoes garagemVagoes, Composição composição){
-
+    
+    private GaragemLocomotiva garagemLocomotiva;
+    private GaragemVagoes garagemVagoes;
+    private PatioComposicoes patio;
+    public Menu(GaragemLocomotiva garagemLocomotiva, GaragemVagoes garagemVagoes, PatioComposicoes patio){
+        this.garagemLocomotiva = garagemLocomotiva;
+        this.garagemVagoes = garagemVagoes;
+        this.patio = patio;
     }
+    private  Scanner sc = new Scanner(System.in);
 
-    private static Scanner sc = new Scanner(System.in);
-
-    public static void mainMenu(GaragemLocomotiva garagemLocomotiva, GaragemVagoes garagemVagoes, Composição composição){
+    public  void mainMenu(){
         System.out.println("Bem-vindo");
         System.out.println("Digite o Número correspondente à opção desejada:");
         System.out.println("\n1 Gerar nova composição (trem); \n2 Editar um trem; \n3 Listar todas os trens já criados (todos os trens que estão no pátio); \n4 Desfazer um trem; \n0 Sair e fechar o programa.");
@@ -46,10 +49,15 @@ public class Menu {
             case 1:
                 //gLocomotiva.getInvetory().get(2);
                 //Colocar variavel correspondente ao ID do trem gerado depois do "+"
-                System.out.println("Novo trem gerado. ID: " + );
+                listLocomotiva();
+                System.out.println("Selecione a Locomotiva que quer adicionar pelo ID" );
+                
+                int locoID = sc.nextInt();
+                patio.addTrem(addLocomotiva(garagemLocomotiva, locoID));
+                System.out.println("Novo trem gerado. ID: " + patio.getTrens().get(patio.getTrens().size()-1).getIdentificador());
                 break;
             case 2:
-                compositionMenu(garagemLocomotiva, garagemVagoes, composição);
+                compositionMenu(garagemLocomotiva, garagemVagoes, patio);
                 break;
             case 3:
                 //listar trens
@@ -57,23 +65,40 @@ public class Menu {
             case 4:
                 //desfazer trem
                 //inserir metodo com o ID entre os "+"
-                System.out.println("Trem de ID " +  + " desmontado.");
+//                System.out.println("Trem de ID " +  + " desmontado.");
                 break;
             case 0:
                 closeAndExit();
                 break;
             default:
                 System.out.println("Por favor, digite uma opção válida.");
-                mainMenu(garagemLocomotiva, garagemVagoes, composição);
+                mainMenu();
         }
     }
 
-    public static void closeAndExit() {
+    private void listLocomotiva() {
+        ArrayList<Locomotiva> l = garagemLocomotiva.getInvetory();
+                
+        System.out.println("Lista de locomotivas livres:");
+        for(int i = 0; i < l.size(); i++){
+            if (l.get(i).getComposição()!= 0){
+                    garagemLocomotiva.toString(i);
+                }
+    }
+    }
+
+    public Composição addLocomotiva(GaragemLocomotiva garagemLocomotiva, int locoID ){
+        Composição novoTrem = new Composição();
+        novoTrem.engataLocomotiva(garagemLocomotiva.getInvetory().get(locoID));
+        return novoTrem;
+    }
+
+    public  void closeAndExit() {
         sc.close();
         System.exit(0);
     }
 
-    public static void compositionMenu (GaragemLocomotiva garagemLocomotiva, GaragemVagoes garagemVagoes, Composição composição) {
+    public  void compositionMenu (GaragemLocomotiva garagemLocomotiva, GaragemVagoes garagemVagoes, PatioComposicoes patio) {
         System.out.println("Gerador de composição:");
         
         System.out.println("Digite o ID do trem a ser editado");
@@ -94,6 +119,7 @@ public class Menu {
                 System.out.println("Digite o identificador da locomotiva a engatar:");
                 //"locoID" é provisório
                 int locoID = sc.nextInt();
+
                 System.out.println("Locomotiva " + locoID + " engatada ao trem de ID " + trainID);
                 break;
             case 2:
@@ -109,34 +135,32 @@ public class Menu {
                 System.out.println("");
                 break;
             case 4:
-                ArrayList<Locomotiva> l = garagemLocomotiva.getInvetory();
-                
-                System.out.println("Lista de locomotivas livres:");
-                for(int i = 0; i < l.size(); i++){
-                    if (l.get(i).getComposição()!= 0){
-                        System.out.println(garagemLocomotiva.toString(i));
-                        }
-            }
+                listLocomotiva();
                 //System.out.println("");
                 break;
             case 5:
-                ArrayList<Vagao> g = garagemVagoes.getInvetory();
+                listVagao();
                 
-                System.out.println("Lista de vagões livres:");
-                for(int i = 0; i < g.size(); i++){
-                    if (g.get(i).getComposição()!= 0){
-                    System.out.println(garagemLocomotiva.toString(i));
-                    }    
-            }
                 
                 break;
             case 6:
-                mainMenu(garagemLocomotiva, garagemVagoes, composição);
+                mainMenu();
                 break;
             default:
             System.out.println("Por favor, digite uma opção válida.");
-            compositionMenu(garagemLocomotiva, garagemVagoes, composição);
+            compositionMenu(garagemLocomotiva, garagemVagoes, patio);
         }
+    }
+
+    private void listVagao() {
+        ArrayList<Vagao> g = garagemVagoes.getInvetory();
+       
+                System.out.println("Lista de vagões livres:");
+                for(int i = 0; i < g.size(); i++){
+                    if (g.get(i).getComposição() == 0){
+                        garagemVagoes.toString(i);
+                    }    
+            }
     }
 }
 
