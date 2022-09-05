@@ -1,0 +1,82 @@
+import java.util.ArrayList;
+
+
+public class Composição{
+    private ArrayList<Object> trem;
+
+    public Composição(){
+        this.trem = new ArrayList<Object>();
+    }
+    public int getIdentificador(){
+        return 1;
+    }
+    public int getQtdadeLocomotiva(){
+        return 1;
+    }
+    public int getQtdadeVagoes(){
+        return 1;
+    }
+    public int getVagoes(){
+        return 1;
+    }
+    public boolean engataLocomotiva(Locomotiva locomotiva){
+        boolean vazio = trem.isEmpty();
+        if(vazio==true){
+            trem.add(locomotiva);
+            return true;
+        }
+            
+        
+        boolean locoAntes = false;
+        
+        if(trem.get(trem.size()-1) instanceof Locomotiva)
+            locoAntes = true;
+        if (locoAntes==true) {
+            trem.add(locomotiva);
+            return true;
+        } else {
+            System.out.println("Não é possível adicionar uma locomotiva após um vagão.");
+            return false;
+        }               
+    }
+    public boolean engataVagoes(Vagao vagao){
+        boolean vazio = trem.isEmpty();
+        if(vazio==true){
+            trem.add(vagao);
+            return false;
+        }
+        else{
+            trem.add(vagao); 
+        }
+
+        return false;
+    }
+    public boolean desengataLocomotiva(){
+        return false;
+    }
+    public boolean desengataVagoes(){
+        return false;
+    }
+    private boolean verificaCapacidade(ArrayList<Object> trem ){
+        this.trem = trem;
+        //;
+        double cargaTotal = 0;
+        for (int i= 0; i>trem.size()-1;){
+            if(trem.get(i) instanceof Locomotiva){
+                i++;
+            }
+            else{
+                cargaTotal = cargaTotal+((Vagao) trem.get(i)).getCapCarga();
+                System.out.println(cargaTotal);
+                i++;
+            }
+        }
+        
+        return false;
+    }
+    private double getCapCarga(){
+        return 1.0;
+    }
+    
+}
+

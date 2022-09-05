@@ -6,13 +6,13 @@ import java.util.ArrayList;
 
 
 
-public class GaragemVagoes {
+public class GaragemLocomotiva {
 
-    private ArrayList<Vagao> inventory;//??
+    private ArrayList<Locomotiva> inventory;//??
     //private int counter;
     //private Boolean check;
 
-    public GaragemVagoes()throws IOException{
+    public GaragemLocomotiva()throws IOException{
         this.inventory = createInventory();
     }
     
@@ -24,45 +24,49 @@ public class GaragemVagoes {
             }
         }
     }*/
-    public ArrayList<Vagao> createInventory() throws IOException {
-        ArrayList<Vagao> inventory = new ArrayList<>(100) ;
-        BufferedReader r = new BufferedReader(new FileReader("VagaData.csv"));
+    public ArrayList<Locomotiva> createInventory() throws IOException {
+        ArrayList<Locomotiva> inventory = new ArrayList<>(100) ;
+        BufferedReader r = new BufferedReader(new FileReader("LocoData.csv"));
         int i = 0;
         String line = r.readLine();
         while (line != null) {
-            inventory.add(i, createVagao(line));
+            inventory.add(i, createLocomotiva(line));
             line = r.readLine();
             i++;
         }
         r.close();
         return inventory;
     }
-    public ArrayList<Vagao> getInvetory() {
+    public ArrayList<Locomotiva> getInvetory() {
         return this.inventory;
 
     }
-    private Vagao createVagao(String line) {
+    private Locomotiva createLocomotiva(String line) {
         String[] attributes = line.split(",");
         boolean type = Boolean.parseBoolean(attributes[0]);
         int id = Integer.parseInt(attributes[1]);
         double carga = Double.parseDouble(attributes[2]);
         //int composição = Integer.parseInt(attributes[3]);
-        //int qtdMaxVagões = Integer.parseInt(attributes[4]);
+        int qtdMaxVagões = Integer.parseInt(attributes[4]);
         //boolean[] habitats = new boolean[6];
         /*for(int i = 0; i < 6; i++)
             habitats[i] = attributes[i+6].equals( "1" )?  true : false;*/
-        return new Vagao(type, id, carga, 0);
+        return new Locomotiva(type, id, carga, 0, qtdMaxVagões);
     }
     
     public String toString(){
-        ArrayList<Vagao> r = getInvetory();
+        ArrayList<Locomotiva> r = getInvetory();
+        int s = r.size()-1;
+        if(s!=0){
+            return toString(s);
+        }
+        return toString(s)+toString(s-1);
+           
+    }
 
-        return (r.iterator().toString());
-    }
     public String toString(int op){
-        ArrayList<Vagao> r = getInvetory();
+        ArrayList<Locomotiva> r = getInvetory();
         
-        return (r.get(op).toString());
+        return r.get(op).toString();
     }
-    
 }
