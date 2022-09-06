@@ -116,8 +116,8 @@ public class Menu {
         System.out.println(" 3: Remover o último elemento do trem;");
         System.out.println(" 4: Listar locomotivas livres;");
         System.out.println(" 5: Listar vagões livres;");
-        System.out.println(" 6. Listar locomotivas de um trem;");
-        System.out.println(" 7. Listar vagões de um trem;");
+        System.out.println(" 6. Listar locomotivas do trem;");
+        System.out.println(" 7. Listar vagões do trem;");
         System.out.println(" 8: Encerrar a edição do trem.");
         int op = sc.nextInt();
 
@@ -158,9 +158,14 @@ public class Menu {
                 break;
             case 5:
                 listVagao();
+                compositionMenu(garagemLocomotiva, garagemVagoes, patio);
+                break;
+            case 6:
+                listLocomotiva(trainID);
                 
                 compositionMenu(garagemLocomotiva, garagemVagoes, patio);
                 break;
+
             case 8:
                 mainMenu();
             default:
@@ -204,11 +209,13 @@ public class Menu {
                 
         System.out.println("Lista de locomotivas no trem:");
         for(int i = 0; i < l.size(); i++){
-            if (l.get(i).getComposição()== tremID){
+            if (l.get(i).getIdentificador()== tremID){
                     System.out.println(garagemLocomotiva.toString(i));
             }
         }
     }
+    
+
     // lista de vagões livres
     private void listVagao() {
         ArrayList<Vagao> g = garagemVagoes.getInvetory();
@@ -237,7 +244,7 @@ public class Menu {
                 System.out.println("Lista de vagões no trem:");
                 for(int i = 0; i < g.size(); i++){
                     if (g.get(i).getComposição() == tremID){
-                        garagemVagoes.toString(i);
+                        System.out.println(garagemVagoes.toString(i));
                     }    
             }
     }

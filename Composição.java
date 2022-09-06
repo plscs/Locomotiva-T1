@@ -61,7 +61,7 @@ public class Composição{
         if(vazio==true){
             trem.add(locomotiva);
             System.out.println("Primeira locomotiva engatada!");
-            locomotiva.setComposição(c);
+            locomotiva.setComposição(id);
             return true;
         }
             
@@ -72,7 +72,7 @@ public class Composição{
         if (locoAntes==true) {
             trem.add(locomotiva);
             System.out.println("Locomotiva engatada!");
-            locomotiva.setComposição(c);
+            locomotiva.setComposição(id);
             return true;
         }
         else {
@@ -100,8 +100,7 @@ public class Composição{
         }
         else{
             trem.add(vagao);
-            vagao.setComposição(c);
-            System.out.println("Vagão engatado!");
+            vagao.setComposição(id);
             return true;
         }
         
