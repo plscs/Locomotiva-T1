@@ -60,4 +60,14 @@ public class GaragemLocomotiva {
         
         return r.get(op).toString();
     }
+
+    public boolean achaLocomotiva(int ID){
+        for(Locomotiva x : inventory)
+            if(x.getIdentificador()==ID)
+                if(x.getComposição()!=0)
+                    return false;
+                else
+                    return true;
+        return false;
+    }
 }

@@ -64,5 +64,17 @@ public class GaragemVagoes {
         
         return (r.get(op).toString());
     }
+
+    public boolean achaVagao(int ID){
+        for(Vagao x : inventory)
+            if(x.getIdentificador()==ID)
+                if(x.getComposição()!=0)
+                    return false;
+                else
+                    return true;
+        return false;
+    }
+
+
     
 }
