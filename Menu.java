@@ -54,6 +54,11 @@ public class Menu {
                 System.out.println("Selecione a Locomotiva que quer adicionar pelo ID" );
                 
                 int locoID = sc.nextInt();
+                if(garagemLocomotiva.achaLocomotiva(locoID)==false){
+                    System.out.println("Locomotiva não encontrada! Tente novamente.");
+                    mainMenu();
+                    break;
+                }
                 patio.addTrem(addLocomotiva(garagemLocomotiva, locoID-1));
                 System.out.println("Novo trem gerado. ID: " + patio.getTrens().get(patio.getTrens().size()-1).getIdentificador());
                 mainMenu();
@@ -118,7 +123,7 @@ public class Menu {
         System.out.println(" 5: Listar vagões livres;");
         System.out.println(" 6. Listar locomotivas do trem;");
         System.out.println(" 7. Listar vagões do trem;");
-        System.out.println(" 8: Encerrar a edição do trem.");
+        System.out.println(" 0: Encerrar a edição do trem.");
         int op = sc.nextInt();
 
         switch(op) {
@@ -127,6 +132,10 @@ public class Menu {
                 System.out.println("Digite o identificador da locomotiva a engatar:");
                 //"locoID" é provisório
                 int locoID = sc.nextInt();
+                if(garagemLocomotiva.achaLocomotiva(locoID)==false){
+                    System.out.println("Locomotiva não encontrada! Tente novamente.");
+                    compositionMenu(garagemLocomotiva, garagemVagoes, patio);
+                }
                 Composição pegaTrem = patio.getTrens().get(trainID-1);
                 pegaTrem.engataLocomotiva(garagemLocomotiva.getInvetory().get(locoID-1));
                 listLocomotiva(true);
@@ -138,6 +147,10 @@ public class Menu {
                 System.out.println("Digite o ID do vagão a ser engatado");
                 // "carID" é provisório
                 int carID = sc.nextInt();
+                if(garagemVagoes.achaVagao(carID)==false){
+                    System.out.println("Vagao nao encontrado! Tente novamente.");
+                    compositionMenu(garagemLocomotiva, garagemVagoes, patio);
+                }
                 pegaTrem = patio.getTrens().get(trainID-1);
                 pegaTrem.EngataVagoes(garagemVagoes.getInvetory().get(carID-1));
                 listVagao(carID);
@@ -166,7 +179,7 @@ public class Menu {
                 compositionMenu(garagemLocomotiva, garagemVagoes, patio);
                 break;
 
-            case 8:
+            case 0:
                 mainMenu();
             default:
                 System.out.println("Por favor, digite uma opção válida.");
@@ -228,7 +241,7 @@ public class Menu {
             }
     }
     // lista de vagões entadados em um trem qualquer
-    private void listVagao(boolean bool) {
+    /*private void listVagao(boolean bool) {
         ArrayList<Vagao> g = garagemVagoes.getInvetory();
        
                 System.out.println("Lista de vagões engatados:");
@@ -237,7 +250,7 @@ public class Menu {
                         garagemVagoes.toString(i);
                     }    
             }
-    }
+    }*/
     private void listVagao(int tremID) {
         ArrayList<Vagao> g = garagemVagoes.getInvetory();
        
