@@ -25,7 +25,7 @@
 */
 import java.util.ArrayList;
 import java.util.Scanner;
-import javax.swing.text.DefaultStyledDocument.ElementSpec;
+//import javax.swing.text.DefaultStyledDocument.ElementSpec;
 
 public class Menu {
     
@@ -59,14 +59,17 @@ public class Menu {
                 break;
             case 2:
                 compositionMenu(garagemLocomotiva, garagemVagoes, patio);
+                mainMenu();
                 break;
             case 3:
+                listLocomotiva();
                 //listar trens
                 break;
             case 4:
                 //desfazer trem
                 //inserir metodo com o ID entre os "+"
 //                System.out.println("Trem de ID " +  + " desmontado.");
+                mainMenu();
                 break;
             case 0:
                 closeAndExit();
@@ -77,22 +80,9 @@ public class Menu {
         }
     }
 
-    private void listLocomotiva() {
-        ArrayList<Locomotiva> l = garagemLocomotiva.getInvetory();
-                
-        System.out.println("Lista de locomotivas livres:");
-        for(int i = 0; i < l.size(); i++){
-            if (l.get(i).getComposição()== 0){
-                    System.out.println(garagemLocomotiva.toString(i));
-                }
-    }
-    }
+    
 
-    public Composição addLocomotiva(GaragemLocomotiva garagemLocomotiva, int locoID ){
-        Composição novoTrem = new Composição();
-        novoTrem.engataLocomotiva(garagemLocomotiva.getInvetory().get(locoID));
-        return novoTrem;
-    }
+    
 
     public  void closeAndExit() {
         sc.close();
@@ -120,45 +110,116 @@ public class Menu {
                 System.out.println("Digite o identificador da locomotiva a engatar:");
                 //"locoID" é provisório
                 int locoID = sc.nextInt();
+                Composição pegaTrem = patio.getTrens().get(trainID-1);
+                pegaTrem.engataLocomotiva(garagemLocomotiva.getInvetory().get(locoID-1));
+                listLocomotiva(true);
 
                 System.out.println("Locomotiva " + locoID + " engatada ao trem de ID " + trainID);
+                compositionMenu(garagemLocomotiva, garagemVagoes, patio);;
                 break;
             case 2:
                 System.out.println("Digite o ID do vagão a ser engatado");
                 // "carID" é provisório
                 int carID = sc.nextInt();
-
+                pegaTrem = patio.getTrens().get(trainID-1);
+                pegaTrem.EngataVagoes(garagemVagoes.getInvetory().get(carID-1));
+                listVagao(carID);
+                
                 System.out.println("Vagão " + carID + " engatado ao trem de ID " + trainID);
+                compositionMenu(garagemLocomotiva, garagemVagoes, patio);;
                 break;
             case 3:
                 //remover ultimo elemento do trem
                 System.out.println("Elemento removido.");
                 System.out.println("");
+                compositionMenu(garagemLocomotiva, garagemVagoes, patio);
                 break;
             case 4:
                 listLocomotiva();
                 //System.out.println("");
+                compositionMenu(garagemLocomotiva, garagemVagoes, patio);
                 break;
             case 5:
                 listVagao();
                 
-                
+                compositionMenu(garagemLocomotiva, garagemVagoes, patio);
+                break;
+            default:
+                System.out.println("Por favor, digite uma opção válida.");
+                compositionMenu(garagemLocomotiva, garagemVagoes, patio);
                 break;
             case 6:
                 mainMenu();
-                break;
-            default:
-            System.out.println("Por favor, digite uma opção válida.");
-            compositionMenu(garagemLocomotiva, garagemVagoes, patio);
+                
+            
         }
     }
-
+// Aqui começa os métodos
+    public Composição addLocomotiva(GaragemLocomotiva garagemLocomotiva, int locoID ){
+        Composição novoTrem = new Composição();
+        novoTrem.engataLocomotiva(garagemLocomotiva.getInvetory().get(locoID));
+        return novoTrem;
+    }
+    // lista de locomotivas livres
+    private void listLocomotiva() {
+        ArrayList<Locomotiva> l = garagemLocomotiva.getInvetory();
+                
+        System.out.println("Lista de locomotivas livres:");
+        for(int i = 0; i < l.size(); i++){
+            if (l.get(i).getComposição()== 0){
+                    System.out.println(garagemLocomotiva.toString(i));
+                }
+    }
+}
+// lista de locomotivas entadadas em um trem qualquer
+    private void listLocomotiva(boolean bool) {
+        ArrayList<Locomotiva> l = garagemLocomotiva.getInvetory();
+                
+        System.out.println("Lista de locomotivas livres:");
+        for(int i = 0; i < l.size(); i++){
+            if (l.get(i).getComposição()!= 0){
+                    System.out.println(garagemLocomotiva.toString(i));
+            }
+        }
+    } 
+    private void listLocomotiva(int tremID) {
+        ArrayList<Locomotiva> l = garagemLocomotiva.getInvetory();
+                
+        System.out.println("Lista de locomotivas no trem:");
+        for(int i = 0; i < l.size(); i++){
+            if (l.get(i).getComposição()== tremID){
+                    System.out.println(garagemLocomotiva.toString(i));
+            }
+        }
+    }
+    // lista de vagões livres
     private void listVagao() {
         ArrayList<Vagao> g = garagemVagoes.getInvetory();
        
-                System.out.println("Lista de vagões livres:");
+            System.out.println("Lista de vagões livres:");
+            for(int i = 0; i < g.size(); i++){
+                if (g.get(i).getComposição() == 0){
+                    garagemVagoes.toString(i);
+                }    
+            }
+    }
+    // lista de vagões entadados em um trem qualquer
+    private void listVagao(boolean bool) {
+        ArrayList<Vagao> g = garagemVagoes.getInvetory();
+       
+                System.out.println("Lista de vagões engatados:");
                 for(int i = 0; i < g.size(); i++){
                     if (g.get(i).getComposição() == 0){
+                        garagemVagoes.toString(i);
+                    }    
+            }
+    }
+    private void listVagao(int tremID) {
+        ArrayList<Vagao> g = garagemVagoes.getInvetory();
+       
+                System.out.println("Lista de vagões no trem:");
+                for(int i = 0; i < g.size(); i++){
+                    if (g.get(i).getComposição() == tremID){
                         garagemVagoes.toString(i);
                     }    
             }
