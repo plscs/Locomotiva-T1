@@ -1,3 +1,10 @@
+/*Autores:
+Jorge Júnior
+Lucas Toshio
+Rômulo Pitt
+Thales Dias
+ */
+
 import java.io.IOException;
 
 
