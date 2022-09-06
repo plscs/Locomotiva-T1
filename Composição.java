@@ -3,16 +3,17 @@ import java.util.ArrayList;
 public class Composição{
     private ArrayList<Object> trem;
 
-    private int c = 0;
+    private static int c = 1;
+    private int id;
 
     public Composição(){
         this.trem = new ArrayList<Object>();
+        id = c;
         c++;
     }
-  
     
     public int getIdentificador(){
-        return c;
+        return id;
     }
     public int getQtdadeLocomotiva(){
         int qtdLoco=0;
@@ -60,7 +61,7 @@ public class Composição{
         if(vazio==true){
             trem.add(locomotiva);
             System.out.println("Primeira locomotiva engatada!");
-            locomotiva.setComposição(c);
+            locomotiva.setComposição(id);
             return true;
         }
             
@@ -71,7 +72,7 @@ public class Composição{
         if (locoAntes==true) {
             trem.add(locomotiva);
             System.out.println("Locomotiva engatada!");
-            locomotiva.setComposição(c);
+            locomotiva.setComposição(id);
             return true;
         }
         else {
@@ -99,8 +100,7 @@ public class Composição{
         }
         else{
             trem.add(vagao);
-            vagao.setComposição(c);
-            System.out.println("Vagão engatado!");
+            vagao.setComposição(id);
             return true;
         }
         
@@ -133,10 +133,19 @@ public class Composição{
             if(trem.get(i) instanceof Vagao)
                 Carga=Carga+((Vagao) trem.get(i)).getCapCarga();
         return Carga;
+    }
     
-
-    } 
+    public void zeraTudo(){
+        for(int i=0; i>=trem.size();i++){
+            if(trem.get(i) instanceof Vagao)
+                ((Vagao) trem.get(i)).setComposição(0);
+            if(trem.get(i) instanceof Locomotiva)
+                ((Locomotiva) trem.get(i)).setComposição(0);
+            }
+            trem.clear();
+    }
 }
+
 
 
 

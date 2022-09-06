@@ -28,7 +28,7 @@ public class Vagao {
 
     }
     public String toString(){
-        return vagao+","+identificador+","+capCarga+","+composição+"." ;
+        return "ID:"+identificador+" Peso Maximo(T):"+capCarga+" Parte do Trem:"+composição+"." ;
     }
     public void setComposição(int c){
         this.composição = c;
