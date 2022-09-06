@@ -12,20 +12,30 @@ public class PatioComposicoes {
    }
 
    public void listaTrens(){
-      for(int i=0;i<=patio.size();i++){
-         if(patio.get(i) instanceof Composição){
-            System.out.println("Índice: "+i+"; Identificador"+patio.get(i).getIdentificador());
-         }
+      System.out.println("O pátio possui os seguintes trens:");
+      for(Composição x : patio){
+         System.out.println("Trem - ID: "+x.getIdentificador());
       }
+
    }
    public ArrayList<Composição> getTrens() {
       return this.patio;
 
   }
 
-   public void desfazTrem(Composição trem){
-      trem.zeraTudo();
-      patio.remove(trem);
+   public void desfazTrem(int i){
+      for(Composição x : patio)
+         if(x.getIdentificador()==i){
+            x.zeraTudo();
+            patio.remove(x);
+            System.out.println("Trem desfeito!");
+      }
+   }
 
+   public boolean achaTrem(int ID){
+      for(Composição x : patio)
+         if(x.getIdentificador()==ID)
+            return true;
+      return false;
    }
 }

@@ -3,16 +3,17 @@ import java.util.ArrayList;
 public class Composição{
     private ArrayList<Object> trem;
 
-    private static int c = 0;
+    private static int c = 1;
+    private int id;
 
     public Composição(){
         this.trem = new ArrayList<Object>();
+        id = c;
         c++;
     }
-  
     
     public int getIdentificador(){
-        return c;
+        return id;
     }
     public int getQtdadeLocomotiva(){
         int qtdLoco=0;

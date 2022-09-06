@@ -9,6 +9,7 @@ public class App {
        GaragemVagoes gVagoes = new GaragemVagoes();
        PatioComposicoes patio = new PatioComposicoes();
 
+       System.out.println("Bem-vindo");
        Menu menu = new Menu(gLocomotiva, gVagoes, patio);
        menu.mainMenu();
        /*System.out.println(gVagoes);

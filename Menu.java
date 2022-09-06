@@ -38,9 +38,10 @@ public class Menu {
         this.patio = patio;
     }
     private  Scanner sc = new Scanner(System.in);
+    
 
     public  void mainMenu(){
-        System.out.println("Bem-vindo");
+        
         System.out.println("Digite o Numero correspondente a opcao desejada:");
         System.out.println("\n1 Gerar nova composicao (trem); \n2 Editar um trem; \n3 Listar todas os trens ja criados (todos os trens que estao no patio); \n4 Desfazer um trem; \n0 Sair e fechar o programa.");
 
@@ -62,10 +63,12 @@ public class Menu {
                 mainMenu();
                 break;
             case 3:
-                listLocomotiva();
+                patio.listaTrens();
+                mainMenu();
                 //listar trens
                 break;
             case 4:
+                desfazTrem();
                 //desfazer trem
                 //inserir metodo com o ID entre os "+"
 //                System.out.println("Trem de ID " +  + " desmontado.");
@@ -82,7 +85,12 @@ public class Menu {
 
     
 
-    
+    public void desfazTrem(){
+        System.out.println("\n Preencha o ID do trem que deseja desfazer:");
+        int i = sc.nextInt();
+        patio.desfazTrem(i);
+
+    }
 
     public  void closeAndExit() {
         sc.close();
@@ -92,8 +100,15 @@ public class Menu {
     public  void compositionMenu (GaragemLocomotiva garagemLocomotiva, GaragemVagoes garagemVagoes, PatioComposicoes patio) {
         System.out.println("Gerador de composição:");
         
-        System.out.println("Digite o ID do trem a ser editado");
+        System.out.println("Digite o ID do trem a ser editado (digite 0 para voltar)");
         int trainID = sc.nextInt();
+        if(trainID==0)
+            mainMenu();
+        if(patio.achaTrem(trainID)==false){
+            System.out.println("ID Inválido!");
+            mainMenu();
+        }
+
 
         System.out.println("Digite a opção desejada:"); 
         System.out.println(" 1: Inserir uma locomotiva (informar identificador) respeitando as restrições;");
@@ -101,7 +116,9 @@ public class Menu {
         System.out.println(" 3: Remover o último elemento do trem;");
         System.out.println(" 4: Listar locomotivas livres;");
         System.out.println(" 5: Listar vagões livres;");
-        System.out.println(" 6: Encerrar a edição do trem.");
+        System.out.println(" 6. Listar locomotivas de um trem;");
+        System.out.println(" 7. Listar vagões de um trem;");
+        System.out.println(" 8: Encerrar a edição do trem.");
         int op = sc.nextInt();
 
         switch(op) {
@@ -115,7 +132,7 @@ public class Menu {
                 listLocomotiva(true);
 
                 System.out.println("Locomotiva " + locoID + " engatada ao trem de ID " + trainID);
-                compositionMenu(garagemLocomotiva, garagemVagoes, patio);;
+                compositionMenu(garagemLocomotiva, garagemVagoes, patio);
                 break;
             case 2:
                 System.out.println("Digite o ID do vagão a ser engatado");
@@ -126,7 +143,7 @@ public class Menu {
                 listVagao(carID);
                 
                 System.out.println("Vagão " + carID + " engatado ao trem de ID " + trainID);
-                compositionMenu(garagemLocomotiva, garagemVagoes, patio);;
+                compositionMenu(garagemLocomotiva, garagemVagoes, patio);
                 break;
             case 3:
                 //remover ultimo elemento do trem
@@ -144,12 +161,12 @@ public class Menu {
                 
                 compositionMenu(garagemLocomotiva, garagemVagoes, patio);
                 break;
+            case 8:
+                mainMenu();
             default:
                 System.out.println("Por favor, digite uma opção válida.");
                 compositionMenu(garagemLocomotiva, garagemVagoes, patio);
                 break;
-            case 6:
-                mainMenu();
                 
             
         }
@@ -199,7 +216,7 @@ public class Menu {
             System.out.println("Lista de vagões livres:");
             for(int i = 0; i < g.size(); i++){
                 if (g.get(i).getComposição() == 0){
-                    garagemVagoes.toString(i);
+                    System.out.println(garagemVagoes.toString(i));
                 }    
             }
     }
